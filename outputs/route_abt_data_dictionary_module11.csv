@@ -1,0 +1,12 @@
+column_name,data_type,description,source,transformation_or_derivation,notes_or_concerns
+origin,str,Origin airport code for the route,flights table,Used as part of route-level grouping key,None identified
+dest,str,Destination airport code for the route,flights table,Used as part of route-level grouping key,"Includes one unusual route, EWR to LGA, with a single cancelled flight"
+flight_count,int64,Number of flights observed for the route,flights table,Count of flight records grouped by origin and destination,"Ranges from 1 to 11,262; 10 routes have fewer than 10 flights, so their averages are unstable"
+avg_dep_delay,float64,The Average Departure Delay for flights on the route,flights table,Mean of dep_delay grouped by origin and destination,Missing for EWR to LGA (its only flight was cancelled); negative values mean early departure on average
+avg_arr_delay,float64,"Average arrival delay for flights on the route, in minutes",flights table,Mean of arr_delay grouped by origin and destination,Missing for EWR to LGA (its only flight was cancelled); negative values mean early arrival on average
+max_arr_delay,float64,The Maximum Arrival Delay for flights on the route,flights table,Max of arr_delay grouped by origin and destination,Missing for EWR to LGA (its only flight was cancelled); extreme values should be reviewed
+avg_distance,float64,The Average Distance for flights on the route,flights table,The average distance grouped by origin and destination,Measured in miles
+avg_air_time,float64,The Average Air Time for flights on the route,flights table,The average air_time grouped by origin and destination,Measured in minutes; missing air_time values are excluded from the average
+dest_airport_name,str,Full name of the destination airport,airports table,Joined from airports using dest = faa,"Missing for 7 routes whose destination (BQN, PSE, SJU, STT) is not in the airports table"
+dest_lat,float64,The Latitude of the destination airport for the route,airports table,Joined from airports.lat using dest = faa,Some routes have missing destination coordinates
+dest_lon,float64,The Longitude of the destination airport for the route,airports table,Joined from airports.lon using dest = faa,Some routes have missing destination coordinates
